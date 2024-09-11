@@ -1,4 +1,4 @@
- name: Build and Deploy to Docker Hub
+name: Build and Deploy to Docker Hub
 
 on:
   push:
@@ -22,21 +22,9 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./docker/Dockerfile.user
+        file: ./Dockerfile
         push: true
-        tags: arihantdotcom/nextapp:latest 
+        tags: arihantdotcom/nextapp:latest  # Replace with your Docker Hub username and repository
 
     - name: Verify Pushed Image
-      run: docker pull arihantdotcom/nextapp:latest 
-
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          sudo docker pull arihantdotcom/nextapp:latest
-          sudo docker stop web-app || true
-          sudo docker rm web-app || true
-          sudo docker run -d --name web-app -p 3005:3000 arihantdotcom/nextapp:latest
+      run: docker pull arihantdotcom/nextapp:tagname:latest  # Replace with your Docker Hub username and repository
