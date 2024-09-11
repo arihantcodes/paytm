@@ -24,7 +24,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: arihantdotcom/nextapp:latest  # Replace with your Docker Hub username and repository
+        tags: arihantdotcom/nextapp:latest 
 
     - name: Verify Pushed Image
-      run: docker pull arihantdotcom/nextapp:tagname:latest  # Replace with your Docker Hub username and repository
+      run: docker pull arihantdotcom/nextapp:latest
